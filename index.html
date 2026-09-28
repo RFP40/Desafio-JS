@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interface didática para o desafio de JavaScript da fintech NUMBANK.">
+    <title>NUMBANK | Transferência Pix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="container">
+            <p class="eyebrow">FINTECH NUMBANK</p>
+            <h1>Transferência Pix</h1>
+            <p class="subtitle">Simulação didática de transferência entre contas.</p>
+        </div>
+    </header>
+
+    <main class="container page-content">
+        <section class="summary-grid" aria-label="Resumo da conta">
+            <article class="card account-card">
+                <div class="card-heading">
+                    <span class="card-label">Conta</span>
+                    <span class="status-badge" id="statusConta">Disponível</span>
+                </div>
+                <p class="account-name" id="nomeCliente">Carlos Oliveira</p>
+                <p class="muted">Saldo disponível</p>
+                <p class="balance" id="saldoConta">R$ 5.000,00</p>
+            </article>
+
+            <article class="card info-card">
+                <span class="card-label">Última atividade</span>
+                <p class="info-value" id="ultimaAtividade">Nenhuma transferência realizada</p>
+                <p class="muted">O histórico será atualizado pelo JavaScript.</p>
+            </article>
+        </section>
+
+        <section class="card transfer-card" aria-labelledby="tituloTransferencia">
+            <div class="section-heading">
+                <div>
+                    <span class="card-label">Nova operação</span>
+                    <h2 id="tituloTransferencia">Realizar transferência</h2>
+                </div>
+                <span class="helper-text">Ambiente de simulação</span>
+            </div>
+
+            <form id="formTransferencia" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="tipoChave">Tipo de chave Pix</label>
+                        <select id="tipoChave" name="tipoChave">
+                            <option value="">Selecione...</option>
+                            <option value="cpf_cnpj">CPF/CNPJ</option>
+                            <option value="email">E-mail</option>
+                            <option value="celular">Celular</option>
+                            <option value="aleatoria">Chave aleatória</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="chavePix">Chave Pix</label>
+                        <input
+                            id="chavePix"
+                            name="chavePix"
+                            type="text"
+                            placeholder="Digite a chave"
+                            autocomplete="off"
+                        >
+                        <small class="field-hint" id="ajudaChave">
+                            Escolha o tipo de chave para começar.
+                        </small>
+                    </div>
+
+                    <div class="field">
+                        <label for="valorTransferencia">Valor da transferência</label>
+                        <div class="input-with-prefix">
+                            <span aria-hidden="true">R$</span>
+                            <input
+                                id="valorTransferencia"
+                                name="valorTransferencia"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="0,00"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="btnTransferir" class="button button-primary" type="submit">
+                        Transferir
+                    </button>
+                    <button id="btnLimpar" class="button button-secondary" type="reset">
+                        Limpar
+                    </button>
+                </div>
+            </form>
+
+            <div id="mensagem" class="message" role="status" aria-live="polite" hidden></div>
+        </section>
+
+        <section class="card history-card" aria-labelledby="tituloHistorico">
+            <div class="section-heading">
+                <div>
+                    <span class="card-label">Movimentações</span>
+                    <h2 id="tituloHistorico">Histórico de transferências</h2>
+                </div>
+                <span class="history-count" id="quantidadeTransferencias">0 operações</span>
+            </div>
+
+            <div id="estadoHistorico" class="empty-state">
+                <p>Nenhuma transferência registrada.</p>
+                <p class="muted">As operações aceitas aparecerão aqui.</p>
+            </div>
+
+            <div id="listaTransferencias" class="history-list" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <p>NUMBANK — ambiente acadêmico de simulação. Nenhuma transferência real é realizada.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
